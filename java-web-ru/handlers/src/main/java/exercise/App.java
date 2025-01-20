@@ -1,7 +1,7 @@
 package exercise;
 
 import io.javalin.Javalin;
-import java.util.List;
+
 public final class App {
 
     public static Javalin getApp() {
@@ -18,8 +18,8 @@ public final class App {
         // Описываем, что будет происходить при GET запросе на адрес /
         // Метод json() кодирует тело ответа в JSON строку и вызывает метод result()
         // Дополнительно устанавливает в ответе заголовок content type со значением json
-        app.get("/phones", ctx -> ctx.json(GET /phones));
-        app.get("/domains", ctx -> ctx.json(GET /domains));
+        app.get("/phones", ctx -> ctx.json("GET /phones"));
+        app.get("/domains", ctx -> ctx.json("GET /domains"));
         // Возвращаем настроенное приложение
         return app;        
         // END
