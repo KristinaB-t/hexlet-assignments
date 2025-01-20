@@ -13,8 +13,8 @@ public final class App {
             config.bundledPlugins.enableDevLogging();
         });
 
-	List<String> phones = Data.getPhones();
-	List<String> domains = Data.getDomains();
+	List<Data> phones = Data.getPhones();
+	List<Data> domains = Data.getDomains();
         // Описываем, что будет происходить при GET запросе на адрес /
         // Метод json() кодирует тело ответа в JSON строку и вызывает метод result()
         // Дополнительно устанавливает в ответе заголовок content type со значением json
