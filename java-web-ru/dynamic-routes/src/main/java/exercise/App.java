@@ -20,15 +20,15 @@ public final class App {
 
         // BEGIN
         app.get("/companies/{id}", ctx -> {
-            var userNumber = ctx.pathParamAsClass("id", Integer.class);
+            var id = ctx.pathParam("id");
 
-            if (userNumber >= companies.size() || userNumber < 0) {
-                throw new NotFoundResponse("404");
-            }
+            Map<String, String> company = COMPANIES.stream()
+                .filter(c -> c.get("id").equals(id))
+                .findFirst()
+                .orElseThrow(() -> new NotFoundResponse("Company not found"));
 
-            var user = companies.get(userNumber);
-            ctx.result(user);
-        });        
+            ctx.json(company);
+        });
         // END
 
         app.get("/companies", ctx -> {
