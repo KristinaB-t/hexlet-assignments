@@ -9,25 +9,15 @@ public class Application {
         var address = new Address("London", 12345678);
 
         // BEGIN
-        for (Method method : Address.class.getDeclaredMethods()) {
+        for (Method method : address.getClass().getDeclaredMethods()) {
 
-            // Проверяем, есть ли у метода аннотация @Inspect
             if (method.isAnnotationPresent(Inspect.class)) {
 
-                var startTime = System.currentTimeMillis();
-
-                try {
-                    // Выполняем метод с аннотацией Inspect
-                    method.invoke(address);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                long endTime = System.currentTimeMillis();
-                long executionTime = endTime - startTime;
-
-                System.out.println("Executed method: " + method.getName());
-                System.out.println("Execution time: " + executionTime + " milliseconds");
+                System.out.println("Method "
+                    + method.getName()
+                    + " returns a value of type "
+                    + method.getReturnType().getSimpleName()
+                );
 	    }
 	}	    
         // END
