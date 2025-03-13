@@ -21,11 +21,10 @@ public class Application {
     private List<User> users = Data.getUsers();
 
     // BEGIN
-    @Autowired // Аннотация нужна для автоподстановки объекта
-private UserProperties userInfo;
+    @Autowired
+    private UserProperties usersInfo;
 
-// Где-то в методах используем
-@GetMapping("/admins")
+    @GetMapping("/admins")
     public List<String> getAdmins() {
 
         List<String> adminEmails = usersInfo.getAdmins();
@@ -36,7 +35,7 @@ private UserProperties userInfo;
             .sorted()
             .toList();
 
-    }    
+    }  
     // END
 
     @GetMapping("/users")
