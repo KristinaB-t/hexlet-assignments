@@ -30,7 +30,7 @@ public class PeopleController {
 
     // BEGIN
     @GetMapping("/people")
-    public Person personALL() {
+    public List<Person> personALL() {
         return personRepository.findAll();
     }
     @PostMapping("/people")
@@ -43,7 +43,7 @@ public class PeopleController {
 
     @DeleteMapping("/people/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void destroy(@PathVariable long id) {
+    public void destroy(@PathVariable String id) {
         personRepository.deleteById(id);
     }}
 
