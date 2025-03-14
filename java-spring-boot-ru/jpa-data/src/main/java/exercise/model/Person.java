@@ -14,13 +14,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Person {
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long id;
+    private long id;
 
-    @Column(unique = true)
     private String firstName;
-
     private String lastName;
 }
 // END
