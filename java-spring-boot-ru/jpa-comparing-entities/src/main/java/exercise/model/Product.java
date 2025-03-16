@@ -19,7 +19,8 @@ import lombok.Setter;
 class Product {
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private String id;
+    @EqualsAndHashCode
+    private long id;
     private String title;
     private long price;
 }
