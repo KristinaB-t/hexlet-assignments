@@ -43,7 +43,7 @@ public class TasksController {
     @PostMapping(path = "")
     @ResponseStatus(HttpStatus.CREATED)
     public Task create(@RequestBody Task task) {
-        return taskRepository.save(task).orElseThrow(() -> new ResourceNotFoundException("Task with id " + id + " not found"));
+        return taskRepository.save(task);
     }
 @PutMapping(path = "/{id}")
     public Task update(@PathVariable long id, @RequestBody Task taskData) {

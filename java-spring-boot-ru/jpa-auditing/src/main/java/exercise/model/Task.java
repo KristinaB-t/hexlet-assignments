@@ -11,6 +11,11 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 // BEGIN
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import jakarta.persistence.GeneratedValue;
+
 @Entity
 @Table(name = "tasks")
 @EntityListeners(AuditingEntityListener.class)
