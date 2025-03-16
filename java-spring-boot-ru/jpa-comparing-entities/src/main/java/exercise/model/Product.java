@@ -17,11 +17,11 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(of = {"title, price"})
 class Product {
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @EqualsAndHashCode
     private long id;
     private String title;
-    private long price;
+    private int price;
 }
 // END
