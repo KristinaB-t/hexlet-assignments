@@ -21,42 +21,51 @@ import exercise.exception.ResourceNotFoundException;
 // BEGIN
 @RestController
 @RequestMapping("/posts")
-public class PeopleController {
+public class PostsController {
 
     @Autowired
     private PostRepository postRepository;
 
-    private CommentRepository commentRepository;
+    @Autowired
+    private CommentRepository commentsRepository;
 
     @GetMapping(path = "")
     public List<Post> index() {
         return postRepository.findAll();
     }
-    @GetMapping(path = "/{id}")
-    public Post show(@PathVariable long id) {
-        return postRepository.findById(id).get();
-    }
 
-    @PostMapping(path = "")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public Post create(@RequestBody Post post) {
-        return postRepository.save(post).orElseThrow(() -> new ResourceNotFoundException());
+        return postRepository.save(post);
     }
-    @PutMapping(path = "/{id}")
-    public Post update(@PathVariable long id, @RequestBody Post postData) {
-        var post =  postRepository.findById(id);
 
-        post.setTitle(postData.getTitle());
-        post.setBody(postData.getBody());
+    @GetMapping(path = "/{id}")
+    public Post show(@PathVariable long id) {
+
+        var post =  postRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Post with id " + id + " not found"));
+
+        return post;
+    }
+
+    @PutMapping("/{id}")
+    public Post update(@PathVariable long id, @RequestBody Post data) {
+        var post =  postRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Post with id " + id + " not found"));
+
+        post.setTitle(data.getTitle());
+        post.setBody(data.getBody());
 
         postRepository.save(post);
 
         return post;
     }
-    @DeleteMapping(path = "/{id}")
-    public void delete(@PathVariable long id) {
+
+    @DeleteMapping("/{id}")
+    public void destroy(@PathVariable long id) {
+        commentsRepository.deleteByPostId(id);
         postRepository.deleteById(id);
-	commentRepository.deleteById(postId);
     }
 }
 // END
