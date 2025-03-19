@@ -2,7 +2,9 @@ package exercise.mapper;
 
 // BEGIN
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 
@@ -17,12 +19,13 @@ import exercise.model.Product;
     unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
 public abstract class ProductMapper {
-    @Mapping(target = "name", source = "title")
-    @Mapping(target = "cost", source = "price")
-    @Mapping(target = "barcode", source = "vendorCode")
+
+    @Mapping(source = "title", target = "name")
+    @Mapping(source = "price", target = "cost")
+    @Mapping(source = "vendorCode", target = "barcode")
     public abstract Product map(ProductCreateDTO dto);
 
-    @Mapping(target = "cost", source = "price")
+    @Mapping(source = "price", target = "cost")
     public abstract void update(ProductUpdateDTO dto, @MappingTarget Product model);
 
     @Mapping(target = "title", source = "name")
