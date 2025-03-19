@@ -54,32 +54,22 @@ public class ProductsController {
     }
 
     // BEGIN
-    @PutMapping("/products/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public ProductDTO update(@RequestBody @Valid ProductUpdateDTO productData, @PathVariable Long id) {
-        var product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Not Found"));
+    @PutMapping(path = "/{id}")
+    public ProductDTO update(@PathVariable long id, @RequestBody ProductUpdateDTO productData) {
+
+        var product =  productRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found"));
+
         toEntity(productData, product);
         productRepository.save(product);
-        var productDTO = toDTO(product);
-        return productDTO;
+
+        return toDTO(product);
     }
 
     private Product toEntity(ProductUpdateDTO productDto, Product product) {
         product.setTitle(productDto.getTitle());
         product.setPrice(productDto.getPrice());
         return product;
-    }
-     private ProductDTO toDTO(Product product) {
-        var dto = new ProductDTO();
-        dto.setId(product.getId());
-        dto.setTitle(product.getTitle());
-        dto.setPrice(product.getPrice());
-        dto.setVendorCode(product.getVendorCode());
-        dto.setCreatedAt(product.getCreatedAt());
-        dto.setUpdatedAt(product.getUpdatedAt());
-        return dto;
-    
     }    
     // END
 

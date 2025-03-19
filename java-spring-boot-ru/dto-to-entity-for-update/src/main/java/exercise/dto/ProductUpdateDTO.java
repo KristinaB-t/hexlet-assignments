@@ -6,9 +6,8 @@ import lombok.Setter;
 // BEGIN
 @Setter
 @Getter
-public class ProductUpdateDTO.java {
-    private String name;
+public class ProductUpdateDTO {
+    private String title;
     private int price;
-    private long vendorCode;
 }
 // END
